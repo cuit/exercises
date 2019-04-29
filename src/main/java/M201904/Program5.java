@@ -35,11 +35,31 @@ public class Program5 {
         while (scanner.hasNext()) {
             String x = scanner.nextLine();
             String y = scanner.nextLine();
+            System.out.println(process(x, y));
         }
     }
 
     private static int process(String x, String y) {
-        // TODO
-        return 0;
+        if (x == null || x.length() == 0) {
+            return y == null ? 0 : y.length();
+        }
+        if (y == null || y.length() == 0) {
+            return x == null ? 0 : x.length();
+        }
+        int sameNum = 0;
+        int i;
+        int j;
+        int index = 0;
+        for (i = 0; i < x.length(); i++) {
+            for (j = index; j < y.length(); j++) {
+                if (x.charAt(i) == y.charAt(j)) {
+                    sameNum++;
+                    index = j + 1;
+                    break;
+                }
+            }
+        }
+        int minLen = Math.min(x.length(), y.length());
+        return minLen - sameNum + Math.abs(x.length() - y.length());
     }
 }
